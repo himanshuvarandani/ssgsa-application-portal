@@ -71,7 +71,7 @@ function ReviewersList() {
   }
 
   const createAccounts = () => {
-    accReviewers.map(async (reviewer) => {
+    accReviewers.slice(0, 10).map(async (reviewer, index) => {
       const password = generateRandomPassword()
       await createReviewer(
         reviewer.name,
@@ -79,6 +79,11 @@ function ReviewersList() {
         password,
         reviewer.sets,
       )
+      if (index === 9 || index == accReviewers.length - 1) {
+        alert(
+          'Credential mails are sent to 10 reviewers. Please check the mails first!',
+        )
+      }
     })
   }
 
@@ -125,7 +130,6 @@ function ReviewersList() {
               <button
                 className="text-white text-medium md:text-lg py-1 px-3 rounded-lg bg-blue-850"
                 onClick={createAccounts}
-                disabled
               >
                 Create Accounts
               </button>
