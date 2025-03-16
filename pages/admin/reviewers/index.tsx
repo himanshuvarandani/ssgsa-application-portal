@@ -49,7 +49,7 @@ function ReviewersList() {
       })
 
       try {
-        if (response)
+        if (response.status === 200)
           await sendReviewerCredMail(name, email, password, sets.join(' '))
       } catch (e) {
         console.log('Error while sending credential mail to', email)
