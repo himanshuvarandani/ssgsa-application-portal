@@ -90,8 +90,7 @@ function InterviewersList() {
 
   const createAccounts = () => {
     setLoading(true)
-    const totalInt = accInterviewers.length
-    accInterviewers.map(async (interviewer, index) => {
+    accInterviewers.slice(0, 10).map(async (interviewer, index) => {
       const password = generateRandomPassword()
       await createInterviewer(
         interviewer.name,
@@ -99,8 +98,11 @@ function InterviewersList() {
         password,
         interviewer.sets,
       )
-      if (index == totalInt - 1) {
+      if (index == 9 || index == accInterviewers.length - 1) {
         setLoading(false)
+        alert(
+          'First 10 Interviewer accounts are created. Make sure to save the PASSWORDS!!',
+        )
       }
     })
   }
@@ -210,8 +212,7 @@ function InterviewersList() {
                     ${!loading ? null : 'opacity-70'}
                 `}
                 onClick={createAccounts}
-                // disabled={loading}
-                disabled
+                disabled={loading}
               >
                 Create Accounts
               </button>
